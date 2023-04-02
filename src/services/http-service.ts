@@ -1,9 +1,9 @@
-import { AxiosInstance } from "axios";
-interface Entity {
+import { AxiosInstance, AxiosRequestConfig } from "axios";
+export interface HttpEntity {
   id: number;
 }
 
-class HttpService<T extends Entity> {
+export class HttpService<T extends HttpEntity> {
   apiClient: AxiosInstance;
   endpoint: string;
 
@@ -11,10 +11,11 @@ class HttpService<T extends Entity> {
     this.apiClient = apiClient;
     this.endpoint = endpoint;
   }
-  getAll<FetchResponse>() {
+  getAll<FetchResponse>(requestConfig?: AxiosRequestConfig) {
     const controller = new AbortController();
     const request = this.apiClient.get<FetchResponse>(this.endpoint, {
       signal: controller.signal,
+      ...requestConfig,
     });
 
     const cancel = () => controller.abort();
@@ -39,7 +40,7 @@ class HttpService<T extends Entity> {
   }
 }
 
-const createHttpService = <T extends Entity>(
+const createHttpService = <T extends HttpEntity>(
   apiClient: AxiosInstance,
   endpoint: string
 ) => new HttpService<T>(apiClient, endpoint);
