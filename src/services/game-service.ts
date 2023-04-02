@@ -7,6 +7,7 @@ const endpoint = "games";
 export interface Game {
   id: number;
   name: string;
+  background_image: string;
 }
 
 export default createHttpService<Game>(apiClient, endpoint);
