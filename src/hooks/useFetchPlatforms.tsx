@@ -1,4 +1,4 @@
-import gameService, { Game } from "../services/game-service";
+import gameService, { Game, Platform } from "../services/game-service";
 import { Genre } from "../services/genre-service";
 import platformService from "../services/platform-service";
 import useFetchEntities from "./useFetchEntities";
@@ -8,7 +8,7 @@ const useFetchPlatforms = () => {
     entities: platforms,
     error,
     isLoading,
-  } = useFetchEntities<Genre>(platformService);
+  } = useFetchEntities<Platform>(platformService);
 
   return {
     platforms,

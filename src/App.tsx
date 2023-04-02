@@ -5,10 +5,13 @@ import NavBar from "./components/NavBar";
 import { useState } from "react";
 import { Genre } from "./services/genre-service";
 import PlatformSelector from "./components/PlatformSelector";
+import { Platform } from "./services/game-service";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-
+  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
+    null
+  );
   return (
     <Grid
       templateAreas={{
@@ -32,8 +35,14 @@ function App() {
         </GridItem>
       </Show>
       <GridItem area="main" bg="">
-        <PlatformSelector />
-        <GameGrid selectedGenre={selectedGenre} />
+        <PlatformSelector
+          selectedPlatform={selectedPlatform}
+          onSelectPlatform={(platform) => setSelectedPlatform(platform)}
+        />
+        <GameGrid
+          selectedGenre={selectedGenre}
+          selectedPlatform={selectedPlatform}
+        />
       </GridItem>
     </Grid>
   );
