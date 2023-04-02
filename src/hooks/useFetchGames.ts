@@ -1,35 +1,27 @@
 import { useEffect, useState } from "react";
 import gameService, { Game } from "../services/game-service";
 import { CanceledError } from "axios";
-interface FetchGameResponse {
-  count: number;
-  results: Game[];
-}
+import useFetchEntities from "./useFetchEntities";
+import { Genre } from "../services/genre-service";
 
-const useFetchGames = () => {
-  const [games, setGames] = useState<Game[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+const useFetchGames = (selectedGenre: Genre | null) => {
+  const {
+    entities: games,
+    error,
+    isLoading,
+  } = useFetchEntities<Game>(
+    gameService,
+    {
+      params: { genres: selectedGenre?.id },
+    },
+    [selectedGenre]
+  );
 
-  useEffect(() => {
-    const { request, cancel } = gameService.getAll<FetchGameResponse>();
-    setIsLoading(true);
-
-    request
-      .then((response) => {
-        setGames(response.data.results);
-        setIsLoading(false); // hide the loader
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-        setIsLoading(false); // hide the loader
-      });
-
-    return () => cancel();
-  }, []);
-
-  return { games, error, isLoading };
+  return {
+    games,
+    error,
+    isLoading,
+  };
 };
 
 export default useFetchGames;

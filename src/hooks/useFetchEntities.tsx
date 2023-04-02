@@ -1,4 +1,4 @@
-import { CanceledError } from "axios";
+import { AxiosRequestConfig, CanceledError } from "axios";
 import { useEffect, useState } from "react";
 import { HttpEntity, HttpService } from "../services/http-service";
 interface FetchResponse<T> {
@@ -8,6 +8,7 @@ interface FetchResponse<T> {
 
 const useFetchEntities = <E extends HttpEntity>(
   service: HttpService<E>,
+  requestConfig?: AxiosRequestConfig,
   deps?: any[]
 ) => {
   const [entities, setEntities] = useState<E[]>([]);
@@ -19,7 +20,8 @@ const useFetchEntities = <E extends HttpEntity>(
       const controller = new AbortController();
       setIsLoading(true);
 
-      const { request, cancel } = service.getAll<FetchResponse<E>>();
+      const { request, cancel } =
+        service.getAll<FetchResponse<E>>(requestConfig);
 
       request
         .then((response) => {

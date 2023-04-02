@@ -1,9 +1,21 @@
-import { HStack, List, ListItem, Text, Image, Spinner } from "@chakra-ui/react";
+import {
+  HStack,
+  List,
+  ListItem,
+  Text,
+  Image,
+  Spinner,
+  Button,
+} from "@chakra-ui/react";
 import useFetchEntities from "../hooks/useFetchEntities";
 import genreService, { Genre } from "../services/genre-service";
 import getCroppedImageUrl from "../services/image-url";
 
-const GenreList = () => {
+interface Props {
+  onSelectGenre: (genre: Genre) => void;
+}
+
+const GenreList = ({ onSelectGenre }: Props) => {
   const {
     entities: genres,
     isLoading,
@@ -22,7 +34,13 @@ const GenreList = () => {
               borderRadius="8"
               src={getCroppedImageUrl(genre.image_background)}
             ></Image>
-            <Text fontSize="lg">{genre.name}</Text>
+            <Button
+              onClick={() => onSelectGenre(genre)}
+              fontSize="lg"
+              variant="link"
+            >
+              {genre.name}
+            </Button>
           </HStack>
         </ListItem>
       ))}
