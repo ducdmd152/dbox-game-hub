@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import gameService, { Game } from "../services/game-service";
-import { CanceledError } from "axios";
-import useFetchEntities from "./useFetchEntities";
 import { Genre } from "../services/genre-service";
+import useFetchEntities from "./useFetchEntities";
 
 const useFetchGames = (selectedGenre: Genre | null) => {
   const {
