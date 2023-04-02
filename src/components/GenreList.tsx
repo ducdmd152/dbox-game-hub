@@ -1,17 +1,25 @@
-import React from "react";
-import useFetchGenres from "../hooks/useFetchGenres";
+import { HStack, List, ListItem, Text, Image } from "@chakra-ui/react";
 import useFetchEntities from "../hooks/useFetchEntities";
 import genreService, { Genre } from "../services/genre-service";
-import apiClient from "../services/api-client";
+import getCroppedImageUrl from "../services/image-url";
 
 const GenreList = () => {
   const { entities: genres } = useFetchEntities<Genre>(genreService);
   return (
-    <ul>
+    <List>
       {genres.map((genre) => (
-        <li key={genre.id}>{genre.name}</li>
+        <ListItem key={genre.id} paddingY="5px">
+          <HStack>
+            <Image
+              boxSize="32px"
+              borderRadius="8"
+              src={getCroppedImageUrl(genre.image_background)}
+            ></Image>
+            <Text fontSize="lg">{genre.name}</Text>
+          </HStack>
+        </ListItem>
       ))}
-    </ul>
+    </List>
   );
 };
 
