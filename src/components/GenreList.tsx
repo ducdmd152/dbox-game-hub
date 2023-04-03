@@ -11,6 +11,7 @@ import {
 import useFetchEntities from "../hooks/useFetchEntities";
 import genreService, { Genre } from "../services/genre-service";
 import getCroppedImageUrl from "../services/image-url";
+import useFetchGenres from "../hooks/useFetchGenres";
 
 interface Props {
   selectedGenre: Genre | null;
@@ -18,11 +19,7 @@ interface Props {
 }
 
 const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
-  const {
-    entities: genres,
-    isLoading,
-    error,
-  } = useFetchEntities<Genre>(genreService);
+  const { genres, isLoading, error } = useFetchGenres();
 
   if (error) return null;
   if (isLoading) return <Spinner />;
