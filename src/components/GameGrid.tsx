@@ -5,17 +5,14 @@ import { Genre } from "../services/genre-service";
 import GameCard from "./GameCard";
 import GameCardContainer from "./GameCardContainer";
 import GameCardSkeleton from "./GameCardSkeleton";
+import { GameQuery } from "../App";
 
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
 }
 
-const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
-  const { games, error, isLoading } = useFetchGames(
-    selectedGenre,
-    selectedPlatform
-  );
+const GameGrid = ({ gameQuery }: Props) => {
+  const { games, error, isLoading } = useFetchGames(gameQuery);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] as const;
 
   return (

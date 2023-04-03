@@ -1,11 +1,9 @@
+import { GameQuery } from "../App";
 import gameService, { Game, Platform } from "../services/game-service";
 import { Genre } from "../services/genre-service";
 import useFetchEntities from "./useFetchEntities";
 
-const useFetchGames = (
-  selectedGenre: Genre | null,
-  selectedPlatform: Platform | null
-) => {
+const useFetchGames = (gameQuery: GameQuery) => {
   const {
     entities: games,
     error,
@@ -13,9 +11,12 @@ const useFetchGames = (
   } = useFetchEntities<Game>(
     gameService,
     {
-      params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
+      params: {
+        genres: gameQuery.genre?.id,
+        platforms: gameQuery.platform?.id,
+      },
     },
-    [selectedGenre?.id, selectedPlatform?.id]
+    [gameQuery]
   );
 
   return {
