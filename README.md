@@ -36,6 +36,6 @@
 - *You also can explore more at https://create-react-app.dev/docs/getting-started/*
 
 ## License & Copyright
-&copy; 2023 Duc Dao ducdmd152 Licensed under the [GNU LICENSE](https://github.com/ducdmd152/dsnackerstore/blob/main/LICENSE).
+&copy; 2023 Duc Dao ducdmd152 Licensed under the [GNU LICENSE](https://github.com/ducdmd152/dbox-game-hub/blob/main/LICENSE).
 
 > 🤟 Feel free to use my repository and star it if you find something interesting 🤟
