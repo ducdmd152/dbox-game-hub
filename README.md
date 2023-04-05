@@ -1,7 +1,7 @@
 
 #  DBox Game Hub
 ### Author: **[Duc Dao](https://beacons.ai/ducdmd152)**
-### Released version: [ DBox Game Hub Releases](https://github.com/ducdmd152/dbox-game-hub/releases/)
+### Released versions: [ DBox Game Hub Releases](https://github.com/ducdmd152/dbox-game-hub/releases/)
 --------------------------------------------------
 ## Table of Contents
 - [Description](#description)
